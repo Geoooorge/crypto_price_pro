@@ -1,2 +1,6 @@
 <h1>Crypto Price Pro</h1>
 <h2>Prices</h2>
+
+<% @prices.each do |price| %>
+  <li><%= price.created_at %> - $<%= price.last %></li>
+<% end %>
