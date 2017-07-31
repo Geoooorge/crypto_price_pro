@@ -8,6 +8,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'foundation-rails'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
+gem 'httparty'
 
 group :development do
   gem 'listen', '~> 3.0.5'
@@ -34,3 +35,5 @@ group :production do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+ruby '2.3.3'
