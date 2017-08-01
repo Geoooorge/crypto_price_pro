@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170731234540) do
+ActiveRecord::Schema.define(version: 20170801150715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "exchange", null: false
+    t.string "currency_pair", null: false
+    t.string "direction", null: false
+    t.string "notification_type", null: false
+    t.decimal "target_price", null: false
+    t.string "status", null: false
+    t.integer "notifications_max", default: 1, null: false
+    t.integer "notifications_sent", default: 0, null: false
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "prices", force: :cascade do |t|
     t.string "exchange", null: false

@@ -1,6 +1,6 @@
 ![Build Status](https://codeship.com/projects/5f17c330-578d-0135-6f2c-3e9c72e1d412/status?branch=master)
 ![Code Climate](https://codeclimate.com/github/Geoooorge/crypto_price_pro.png)
-![Coverage Status](https://coveralls.io/repos/Geoooorge/crypto_price_pro/badge.png)
+![Coverage Status](https://coveralls.io/repos/Geoooorge/crypto_price_pro/badge.svg)
 
 # README
 
