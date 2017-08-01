@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'foundation-rails'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'httparty'
+gem 'devise'
 
 group :development do
   gem 'listen', '~> 3.0.5'
