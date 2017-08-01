@@ -1,0 +1,23 @@
+<h1>Edit Notification</h1>
+<%= form_for(@notification) do |f| %>
+  <%= f.label :exchange %>
+  <%= f.text_field :exchange %>
+
+  <%= f.label :currency_pair %>
+  <%= f.text_field :currency_pair %>
+
+  <%= f.label :direction %>
+  <%= f.text_field :direction %>
+
+  <%= f.label :notification_type %>
+  <%= f.text_field :notification_type %>
+
+  <%= f.label :target_price %>
+  <%= f.text_field :target_price %>
+
+  <%= f.label :status %>
+  <%= f.text_field :status %>
+
+  <%= f.submit "Update Notification" %>
+
+<% end %>
