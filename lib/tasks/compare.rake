@@ -5,15 +5,15 @@ namespace :notify do
     @notifications = Notification.where(status: 'active')
 
     @notifications.each do |notification|
-      if @price.exchange ==  notification.exchange && @price.currency_pair == notification.currency_pair
+      if @price.exchange == notification.exchange && @price.currency_pair == notification.currency_pair
         if notification.direction == 'below' && @price.last < notification.target_price
           notification.increment(:notifications_sent)
           notification.save
-          #send notification to user based on preference
+          # send notification to user based on preference
         elsif notification.direction == 'above' && @price.last > notification.target_price
           notification.increment(:notifications_sent)
           notification.save
-          #send notification to user based on preference
+          # send notification to user based on preference
         else
         end
         if notification.notifications_sent >= notification.notifications_max
