@@ -10,6 +10,7 @@ gem 'foundation-rails'
 gem 'httparty'
 gem 'devise'
 gem 'twilio-ruby'
+gem 'webpacker'
 
 group :development do
   gem 'listen', '~> 3.0.5'
