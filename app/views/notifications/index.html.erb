@@ -3,6 +3,6 @@
 <%= link_to "Add Notification", new_notification_path %>
 <% @notifications.each do |notification| %>
   <li>
-    <%= notification.user_id %> - <%= notification.exchange %> - <%= notification.currency_pair %> - <%= notification.target_price %> - <%= notification.notification_type %> <%= link_to "Edit",  edit_notification_path(notification) %> - <%= link_to "Delete",  notification_path(notification), method: :delete %>
+    <%= notification.status %> - <%= notification.user_id %> - <%= notification.exchange %> - <%= notification.currency_pair %> - <%= notification.direction %> - <%= notification.target_price %> - <%= notification.notification_type %> - <%= notification.notifications_sent %> - <%= notification.notifications_max %> <%= link_to "Edit",  edit_notification_path(notification) %> - <%= link_to "Delete",  notification_path(notification), method: :delete %>
   </li>
 <% end %>
