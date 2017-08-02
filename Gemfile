@@ -7,9 +7,9 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'foundation-rails'
-gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'httparty'
 gem 'devise'
+gem 'twilio-ruby'
 
 group :development do
   gem 'listen', '~> 3.0.5'
@@ -25,6 +25,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda'
   gem 'valid_attribute'
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
 end
 
 group :test do
