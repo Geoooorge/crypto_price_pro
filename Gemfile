@@ -11,6 +11,7 @@ gem 'httparty'
 gem 'devise'
 gem 'twilio-ruby'
 gem 'webpacker'
+gem "active_model_serializers"
 
 group :development do
   gem 'listen', '~> 3.0.5'
