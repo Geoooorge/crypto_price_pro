@@ -1,4 +1,7 @@
-<h1>Notifications</h1>
+<%= javascript_pack_tag 'main' %>
+<h1>Price Notifications</h1>
+
+<div id="main"></div>
 
 <%= link_to "Add Notification", new_notification_path %>
 <% @notifications.each do |notification| %>

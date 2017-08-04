@@ -3,4 +3,10 @@ Rails.application.routes.draw do
 
   resources :notifications
   root "prices#index"
+
+  namespace :api do
+    namespace :v1 do
+      resources :notifications
+    end
+  end
 end
