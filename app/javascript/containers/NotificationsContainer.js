@@ -1,12 +1,14 @@
 import React from 'react';
 import NotificationTile from '../components/NotificationTile'
 import NotificationsFormContainer from './NotificationsFormContainer'
+import PriceTile from '../components/PriceTile'
 
 class NotificationsContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notifications: []
+      notifications: [],
+      prices: []
     }
     this.addNewNotification = this.addNewNotification.bind(this);
   }
@@ -31,6 +33,26 @@ class NotificationsContainer extends React.Component {
         });
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
+
+      fetch('/api/v1/prices')
+          .then(response => {
+            if (response.ok) {
+              return response;
+            } else {
+              let errorMessage = `${response.status} (${response.statusText})`,
+                  error = new Error(errorMessage);
+              throw(error);
+            }
+          })
+          .then(response => response.json())
+          .then(body => {
+            let prices = body;
+            this.setState({
+              prices: prices
+            });
+          })
+          .catch(error => console.error(`Error in fetch: ${error.message}`));
+
   }
 
   addNewNotification(formPayload) {
@@ -48,8 +70,23 @@ class NotificationsContainer extends React.Component {
     })
   }
 
+
   render() {
-    console.log(this.state.notifications)
+
+    let prices = this.state.prices.map(price => {
+      return(
+        <PriceTile
+          key={price.id}
+          id={price.id}
+          price={price.last}
+          currency={price.currency_pair}
+          time={price.created_at}
+          exchange={price.exchange}
+        />
+      )
+    })
+
+
     let notifications = this.state.notifications.map(notification => {
       return(
         <NotificationTile
@@ -72,9 +109,15 @@ class NotificationsContainer extends React.Component {
     <div>
       <NotificationsFormContainer addNewNotification={this.addNewNotification}
       />
-      {notifications}
+      <div className="row">
+        <div className="col s12 l4">
+          {prices}
+        </div>
+        <div className="col s12 l8">
+          {notifications}
+        </div>
+      </div>
     </div>
-
     );
   }
 }
