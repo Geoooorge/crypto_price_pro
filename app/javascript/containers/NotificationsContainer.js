@@ -2,16 +2,21 @@ import React from 'react';
 import NotificationTile from '../components/NotificationTile'
 import NotificationsFormContainer from './NotificationsFormContainer'
 import PriceTile from '../components/PriceTile'
+import ChartTile from '../components/ChartTile'
 
 class NotificationsContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       notifications: [],
-      prices: []
+      prices: [],
+      chartPrice: [],
+      chartDate: []
     }
     this.addNewNotification = this.addNewNotification.bind(this);
   }
+
+
   componentDidMount() {
     fetch('/api/v1/notifications', {
       credentials: "same-origin"
@@ -47,12 +52,23 @@ class NotificationsContainer extends React.Component {
           .then(response => response.json())
           .then(body => {
             let prices = body;
+            let chartPrice = prices.map(price => {
+              return(
+                parseFloat(price.last)
+              )
+            });
+            let chartDate = prices.map(price => {
+              return(
+                price.created_at
+              )
+            })
             this.setState({
-              prices: prices
+              prices: prices,
+              chartPrice: chartPrice,
+              chartDate: chartDate
             });
           })
           .catch(error => console.error(`Error in fetch: ${error.message}`));
-
   }
 
   addNewNotification(formPayload) {
@@ -87,6 +103,7 @@ class NotificationsContainer extends React.Component {
     })
 
 
+
     let notifications = this.state.notifications.map(notification => {
       return(
         <NotificationTile
@@ -107,6 +124,10 @@ class NotificationsContainer extends React.Component {
 
     return(
     <div>
+      <ChartTile
+        chartPrice={this.state.chartPrice}
+        chartDate={this.state.chartDate}
+      />
       <NotificationsFormContainer addNewNotification={this.addNewNotification}
       />
       <div className="row">
