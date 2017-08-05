@@ -6,12 +6,13 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
-gem 'foundation-rails'
 gem 'httparty'
 gem 'devise'
 gem 'twilio-ruby'
 gem 'webpacker'
 gem "active_model_serializers"
+gem 'materialize-sass'
+gem 'material_icons'
 
 group :development do
   gem 'listen', '~> 3.0.5'

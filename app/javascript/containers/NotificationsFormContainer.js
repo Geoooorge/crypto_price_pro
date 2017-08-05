@@ -72,53 +72,68 @@ class NotificationsFormContainer extends React.Component {
   render() {
 
     return(
-      <form className="new-notification-form" onSubmit={this.handleFormSubmit}>
-        <ExchangeSelect
-          handlerFunction={this.handleExchangeSelection}
-          name='exchange'
-          label='Exchange'
-          options={this.state.exchangeOptions}
-          selectedOption={this.state.exchangeSelected}
-        />
-        <CurrencySelect
-          handlerFunction={this.handleCurrencySelection}
-          name='currency'
-          label='Currency'
-          options={this.state.currencyOptions}
-          selectedOption={this.state.currencySelected}
-        />
-        <DirectionSelect
-          handlerFunction={this.handleDirectionSelection}
-          name='direction'
-          label='Direction'
-          options={this.state.directionOptions}
-          selectedOption={this.state.directionSelected}
-        />
-        <NotifyTypeSelect
-          handlerFunction={this.handleNotifyTypeSelection}
-          name='type'
-          label='Type'
-          options={this.state.notifyTypeOptions}
-          selectedOption={this.state.notifyTypeSelected}
-        />
-        <PriceText
-          content={this.state.price}
-          name='price'
-          label="Price"
-          handlerFunction={this.handlePriceChange}
-        />
-        <NotifyMaxSelect
-          handlerFunction={this.handleMaxChange}
-          name='max-notifications'
-          label="Max Notifications"
-          options={this.state.notifyMaxOptions}
-          content={this.state.notifyMaxSelected}
-        />
-
-        <div className="button-group">
-          <input className="button" type="submit" value="Submit" />
+    <div className="row">
+      <form className="new-notification-form col s12" onSubmit={this.handleFormSubmit}>
+        <div className="row">
+          <div className="col s12 l2 m6">
+            <ExchangeSelect
+              handlerFunction={this.handleExchangeSelection}
+              name='exchange'
+              label='Exchange'
+              options={this.state.exchangeOptions}
+              selectedOption={this.state.exchangeSelected}
+            />
+          </div>
+          <div className="col s12 l2 m6">
+            <CurrencySelect
+              handlerFunction={this.handleCurrencySelection}
+              name='currency'
+              label='Currency'
+              options={this.state.currencyOptions}
+              selectedOption={this.state.currencySelected}
+            />
+          </div>
+          <div className="col s12 l2 m6">
+            <DirectionSelect
+              handlerFunction={this.handleDirectionSelection}
+              name='direction'
+              label='Direction'
+              options={this.state.directionOptions}
+              selectedOption={this.state.directionSelected}
+            />
+          </div>
+          <div className="col s12 l2 m6">
+            <NotifyTypeSelect
+              handlerFunction={this.handleNotifyTypeSelection}
+              name='type'
+              label='Type'
+              options={this.state.notifyTypeOptions}
+              selectedOption={this.state.notifyTypeSelected}
+            />
+          </div>
+          <div className="col s12 l2 m6">
+            <PriceText
+              content={this.state.price}
+              name='price'
+              label="Price"
+              handlerFunction={this.handlePriceChange}
+            />
+          </div>
+          <div className="col s12 l2 m6">
+            <NotifyMaxSelect
+              handlerFunction={this.handleMaxChange}
+              name='max-notifications'
+              label="Max Notifications"
+              options={this.state.notifyMaxOptions}
+              content={this.state.notifyMaxSelected}
+            />
+          </div>
+          <div className="button-group">
+            <input className="waves-effect waves-light btn" type="submit" value="Add Alert" />
+          </div>
         </div>
       </form>
+    </div>
 
     );
   }
