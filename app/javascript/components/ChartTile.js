@@ -6,7 +6,7 @@ class ChartTile extends React.Component {
   render() {
 
     let chartData = {
-      labels: ["","","","",""],
+      labels: ["","","","","","","","","","","","","","","","","","","",""],
       datasets:[
         {
           label: 'Bitcoin (Bitstamp)',
