@@ -3,7 +3,7 @@ import React from 'react';
 const PriceText = (props) => {
   return (
     <label>{props.label}
-      <input
+      <input className="browser-default"
         name={props.name}
         onChange={props.handlerFunction}
         type='text'

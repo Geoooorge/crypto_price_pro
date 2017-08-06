@@ -103,20 +103,20 @@ class NotificationsFormContainer extends React.Component {
             />
           </div>
           <div className="col s12 l2 m6">
-            <NotifyTypeSelect
-              handlerFunction={this.handleNotifyTypeSelection}
-              name='type'
-              label='Type'
-              options={this.state.notifyTypeOptions}
-              selectedOption={this.state.notifyTypeSelected}
-            />
-          </div>
-          <div className="col s12 l2 m6">
             <PriceText
               content={this.state.price}
               name='price'
               label="Price"
               handlerFunction={this.handlePriceChange}
+            />
+          </div>
+          <div className="col s12 l2 m6">
+            <NotifyTypeSelect
+              handlerFunction={this.handleNotifyTypeSelection}
+              name='alert-type'
+              label='Alert Type'
+              options={this.state.notifyTypeOptions}
+              selectedOption={this.state.notifyTypeSelected}
             />
           </div>
           <div className="col s12 l2 m6">

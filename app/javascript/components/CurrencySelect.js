@@ -9,8 +9,7 @@ const CurrencySelect = (props) => {
 
   return (
     <label>{props.label}
-    <select name={props.name} value={props.selectedOption} onChange={props.handlerFunction}>
-      <option value=""></option>
+    <select className="browser-default" name={props.name} value={props.selectedOption} onChange={props.handlerFunction}>
       {optionElements}
     </select>
   </label>
