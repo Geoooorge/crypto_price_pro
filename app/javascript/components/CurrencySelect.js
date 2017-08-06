@@ -10,6 +10,7 @@ const CurrencySelect = (props) => {
   return (
     <label>{props.label}
     <select className="browser-default" name={props.name} value={props.selectedOption} onChange={props.handlerFunction}>
+      <option value="">Choose Currency</option>
       {optionElements}
     </select>
   </label>
