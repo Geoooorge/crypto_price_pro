@@ -16,7 +16,6 @@ class NotificationsContainer extends React.Component {
     this.addNewNotification = this.addNewNotification.bind(this);
   }
 
-
   componentDidMount() {
     fetch('/api/v1/notifications', {
       credentials: "same-origin"
@@ -128,7 +127,9 @@ class NotificationsContainer extends React.Component {
         chartPrice={this.state.chartPrice}
         chartDate={this.state.chartDate}
       />
-      <NotificationsFormContainer addNewNotification={this.addNewNotification}
+      <NotificationsFormContainer
+        addNewNotification={this.addNewNotification}
+        options={options}
       />
       <div className="row">
         <div className="col s12 l4">
@@ -141,6 +142,12 @@ class NotificationsContainer extends React.Component {
     </div>
     );
   }
+}
+
+const options = {
+  "bitstamp": ["btcusd", "ltcusd"],
+  "gemini": ["ethusd", "btcusd"],
+  "gdax": ["dumcoin", "sillycoin", "dogecoin"]
 }
 
 export default NotificationsContainer;

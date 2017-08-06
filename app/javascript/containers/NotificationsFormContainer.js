@@ -10,13 +10,12 @@ class NotificationsFormContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      exchangeOptions: ['bitstamp', 'gdax', 'gemini'],
-      exchangeSelected: 'bitstamp',
-      currencyOptions: ['btcusd', 'ethusd'],
-      currencySelected: 'btcusd',
+      firstLevel: Object.keys(props.options)[0],
+      secondLevel: '',
+      currencySelected: '',
       directionOptions: ['above', 'below'],
       directionSelected: 'above',
-      notifyTypeOptions: ['email', 'text'],
+      notifyTypeOptions: ['text','email'],
       notifyTypeSelected: 'text',
       price: '',
       notifyMaxOptions: [1, 2, 3, 4, 5],
@@ -29,19 +28,29 @@ class NotificationsFormContainer extends React.Component {
     this.handleMaxChange = this.handleMaxChange.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleFirstLevelChange = this.handleFirstLevelChange.bind(this)
+    this.handleSecondLevelChange = this.handleSecondLevelChange.bind(this)
   }
 
   handleFormSubmit(event) {
     event.preventDefault();
     let formPayload = {
-      exchange: this.state.exchangeSelected,
-      currency_pair: this.state.currencySelected,
+      exchange: this.state.firstLevel,
+      currency_pair: this.state.secondLevel,
       direction: this.state.directionSelected,
       notification_type: this.state.notifyTypeSelected,
       target_price: this.state.price,
       notifications_max: this.state.notifyMaxSelected
     }
     this.props.addNewNotification(formPayload);
+  }
+
+  handleFirstLevelChange(event) {
+   this.setState({firstLevel: event.target.value});
+  }
+
+  handleSecondLevelChange(event) {
+     this.setState({secondLevel: event.target.value });
   }
 
   handleExchangeSelection(event) {
@@ -68,31 +77,37 @@ class NotificationsFormContainer extends React.Component {
     this.setState({ notifyMaxSelected: event.target.value })
   }
 
-
   render() {
+
+    let firstLevelOptions = Object.keys(this.props.options)
+    let secondLevelOptions = this.props.options[this.state.firstLevel]
 
     return(
     <div className="row">
       <form className="new-notification-form col s12" onSubmit={this.handleFormSubmit}>
         <div className="row">
+
           <div className="col s12 l2 m6">
             <ExchangeSelect
-              handlerFunction={this.handleExchangeSelection}
+              handlerFunction={this.handleFirstLevelChange}
               name='exchange'
               label='Exchange'
-              options={this.state.exchangeOptions}
-              selectedOption={this.state.exchangeSelected}
+              options={firstLevelOptions}
+              selectedOption={this.state.firstLevel}
             />
           </div>
+
           <div className="col s12 l2 m6">
             <CurrencySelect
-              handlerFunction={this.handleCurrencySelection}
-              name='currency'
-              label='Currency'
-              options={this.state.currencyOptions}
-              selectedOption={this.state.currencySelected}
+              handlerFunction={this.handleSecondLevelChange}
+              name='currency-pair'
+              label='Currency Pair'
+              options={secondLevelOptions}
+              selectedOption={this.state.secondLevel}
             />
           </div>
+
+
           <div className="col s12 l2 m6">
             <DirectionSelect
               handlerFunction={this.handleDirectionSelection}
@@ -134,7 +149,6 @@ class NotificationsFormContainer extends React.Component {
         </div>
       </form>
     </div>
-
     );
   }
 }
