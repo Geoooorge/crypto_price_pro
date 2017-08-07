@@ -6,18 +6,34 @@ class ChartTile extends React.Component {
   render() {
 
     let chartData = {
-      labels: ["","","","","","","","","","","","","","","","","","","",""],
+      labels: this.props.chartDate,
       datasets:[
         {
           label: 'Bitcoin (Bitstamp)',
-          data: this.props.chartPrice,
+          data: this.props.chartBitstampBtc,
           backgroundColor:[
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
+            'rgba(247, 7, 7, 0.2)'
+          ]
+        },
+        {
+          label: 'Ethereum (Coinbase)',
+          data: this.props.chartCoinbaseEth,
+          backgroundColor:[
+            'rgba(12, 142, 37, 0.2)'
+          ]
+        },
+        {
+          label: 'Bitcoin (Bitfinex)',
+          data: this.props.chartBitfinexBtc,
+          backgroundColor:[
+            'rgba(24, 15, 191, 0.2)'
+          ]
+        },
+        {
+          label: 'Bitcoin (Coinbase)',
+          data: this.props.chartCoinbaseBtc,
+          backgroundColor:[
+            'rgba(249, 240, 45, 0.2)'
           ]
         }
       ]
