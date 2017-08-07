@@ -11,16 +11,16 @@
   <body>
     <nav>
       <div class="nav-wrapper">
-        <a href="/" class="brand-logo center">Coin Gazer</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <a href="/" class="brand-logo">Coin Gazer</a>
+        <ul id="nav-mobile" class="right">
           <% if user_signed_in? %>
             <li><%= "Welcome back #{current_user.first_name}!" %></li>
             <li><%= link_to "Current Price Alerts", notifications_path %></li>
             <li><%= link_to "My Account", edit_user_registration_path %></li>
             <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
           <% else %>
-          <%= link_to "Sign Up", new_user_registration_path %>
-          <%= link_to "Sign In", new_user_session_path %>
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+            <li><%= link_to "Sign In", new_user_session_path %></li>
           <% end %>
         </ul>
       </div>
