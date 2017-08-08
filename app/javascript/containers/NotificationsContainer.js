@@ -11,7 +11,6 @@ class NotificationsContainer extends React.Component {
       notifications: [],
       prices: [],
       chartBitstampBtc: [],
-      chartCoinbaseEth: [],
       chartCoinbaseBtc: [],
       chartBitfinexBtc: [],
       chartDate: []
@@ -81,15 +80,6 @@ class NotificationsContainer extends React.Component {
                   parseFloat(price.last)
                 )
             });
-            let chartCoinbaseEth = prices.filter(price => {
-              return(
-                price.exchange === 'coinbase' && price.currency_pair === 'ethusd'
-              )
-              }).map(price => {
-                return(
-                  parseFloat(price.last)
-                )
-            });
             let chartDate = prices.filter(price => {
               return(
                 price.exchange === 'bitstamp' && price.currency_pair === 'btcusd'
@@ -102,7 +92,6 @@ class NotificationsContainer extends React.Component {
             this.setState({
               prices: prices,
               chartBitstampBtc: chartBitstampBtc,
-              chartCoinbaseEth: chartCoinbaseEth,
               chartBitfinexBtc: chartBitfinexBtc,
               chartCoinbaseBtc: chartCoinbaseBtc,
               chartDate: chartDate
@@ -166,7 +155,6 @@ class NotificationsContainer extends React.Component {
     <div>
       <ChartTile
         chartBitstampBtc={this.state.chartBitstampBtc}
-        chartCoinbaseEth={this.state.chartCoinbaseEth}
         chartBitfinexBtc={this.state.chartBitfinexBtc}
         chartCoinbaseBtc={this.state.chartCoinbaseBtc}
         chartDate={this.state.chartDate}
