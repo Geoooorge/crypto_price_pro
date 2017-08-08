@@ -20,9 +20,17 @@ class NotificationTile extends React.Component {
   render() {
 
     return (
-      <div className="notification-tile">
-        <li>{this.props.id} - {this.props.userId} - {this.props.exchange} - {this.props.currencyPair} - {this.props.notificationType} - {this.props.direction} - {this.props.targetPrice} - {this.props.notificationsSent} - {this.props.notificationsMax} - {this.props.status} -  <i onClick={this.handleDelete} className="material-icons">delete</i></li>
-      </div>
+          <tr>
+          <td>{this.props.exchange}</td>
+          <td>{this.props.currencyPair}</td>
+          <td>{this.props.notificationType}</td>
+          <td>{this.props.direction}</td>
+          <td>{this.props.targetPrice}</td>
+          <td>{this.props.notificationsSent}</td>
+          <td>{this.props.notificationsMax}</td>
+          <td>{this.props.status}</td>
+          <td><button onClick={this.handleDelete} className="btn waves-effect waves-teal">Delete</button></td>
+        </tr>
     )
   }
 }

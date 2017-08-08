@@ -195,7 +195,25 @@ class NotificationsContainer extends React.Component {
           {prices}
         </div>
         <div className="col s12 l8">
-          {notifications}
+          <table>
+            <thead>
+              <tr>
+                  <th>Exchange</th>
+                  <th>Curency Pair</th>
+                  <th>Notification Type</th>
+                  <th>Direction</th>
+                  <th>Target Price</th>
+                  <th>Notifications Sent</th>
+                  <th>Max Notifications</th>
+                  <th>Status</th>
+                  <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              {notifications}
+            </tbody>
+        </table>
         </div>
       </div>
     </div>
