@@ -16,6 +16,7 @@ class NotificationsContainer extends React.Component {
       chartDate: []
     }
     this.addNewNotification = this.addNewNotification.bind(this);
+    this.deleteNotification = this.deleteNotification.bind(this);
   }
 
   componentDidMount() {
@@ -115,6 +116,31 @@ class NotificationsContainer extends React.Component {
     })
   }
 
+  deleteNotification(formPayload) {
+    let delete_id = formPayload.d_id
+    fetch(`/api/v1/notifications/${delete_id}`, {
+      method: 'DELETE',
+      credentials: 'same-origin'
+    })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+              error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        let notifications = body;
+        this.setState({
+          notifications: notifications
+        });
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
 
   render() {
 
@@ -147,6 +173,7 @@ class NotificationsContainer extends React.Component {
           notificationsMax={notification.notifications_max}
           userId={notification.user_id}
           status={notification.status}
+          deleteNotification={this.deleteNotification}
         />
       )
     })
