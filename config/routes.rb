@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :notifications
-      resources :prices
+      resources :prices do
+        get 'chart_prices', on: :collection
+        get 'chart_stream', on: :collection
+      end
     end
   end
 end

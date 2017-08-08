@@ -13,14 +13,100 @@ class NotificationsContainer extends React.Component {
       chartBitstampBtc: [],
       chartCoinbaseBtc: [],
       chartBitfinexBtc: [],
-      chartDate: []
+      chartDate: [],
+      priceStream: []
     }
     this.addNewNotification = this.addNewNotification.bind(this);
     this.deleteNotification = this.deleteNotification.bind(this);
+    this.priceStreamUpdate = this.priceStreamUpdate.bind(this);
+    this.priceChartUpdate = this.priceChartUpdate.bind(this);
+  }
+
+  priceStreamUpdate() {
+    fetch('/api/v1/prices/chart_stream')
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+              error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        let priceStream = body;
+        this.setState({
+          priceStream: priceStream
+        });
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
+  priceChartUpdate() {
+    fetch('/api/v1/prices/chart_prices')
+        .then(response => {
+          if (response.ok) {
+            return response;
+          } else {
+            let errorMessage = `${response.status} (${response.statusText})`,
+                error = new Error(errorMessage);
+            throw(error);
+          }
+        })
+        .then(response => response.json())
+        .then(body => {
+          let prices = body;
+          let chartBitstampBtc = prices.filter(price => {
+            return(
+              price.exchange === 'bitstamp' && price.currency_pair === 'btcusd'
+            )
+            }).map(price => {
+              return(
+                parseFloat(price.last)
+              )
+          });
+          let chartBitfinexBtc = prices.filter(price => {
+            return(
+              price.exchange === 'bitfinex' && price.currency_pair === 'btcusd'
+            )
+            }).map(price => {
+              return(
+                parseFloat(price.last)
+              )
+          });
+          let chartCoinbaseBtc = prices.filter(price => {
+            return(
+              price.exchange === 'coinbase' && price.currency_pair === 'btcusd'
+            )
+            }).map(price => {
+              return(
+                parseFloat(price.last)
+              )
+          });
+          let chartDate = prices.filter(price => {
+            return(
+              price.exchange === 'bitstamp' && price.currency_pair === 'btcusd'
+            )
+          }).map(price => {
+            return(
+              ""
+            )
+          });
+          this.setState({
+            prices: prices,
+            chartBitstampBtc: chartBitstampBtc,
+            chartBitfinexBtc: chartBitfinexBtc,
+            chartCoinbaseBtc: chartCoinbaseBtc,
+            chartDate: chartDate
+          });
+        })
+        .catch(error => console.error(`Error in fetch: ${error.message}`));
+
   }
 
   componentDidMount() {
-    fetch('/api/v1/notifications', {
+    fetch('/api/v1/notifications/', {
       credentials: "same-origin"
     })
       .then(response => {
@@ -41,64 +127,11 @@ class NotificationsContainer extends React.Component {
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
 
-      fetch('/api/v1/prices')
-          .then(response => {
-            if (response.ok) {
-              return response;
-            } else {
-              let errorMessage = `${response.status} (${response.statusText})`,
-                  error = new Error(errorMessage);
-              throw(error);
-            }
-          })
-          .then(response => response.json())
-          .then(body => {
-            let prices = body;
-            let chartBitstampBtc = prices.filter(price => {
-              return(
-                price.exchange === 'bitstamp' && price.currency_pair === 'btcusd'
-              )
-              }).map(price => {
-                return(
-                  parseFloat(price.last)
-                )
-            });
-            let chartBitfinexBtc = prices.filter(price => {
-              return(
-                price.exchange === 'bitfinex' && price.currency_pair === 'btcusd'
-              )
-              }).map(price => {
-                return(
-                  parseFloat(price.last)
-                )
-            });
-            let chartCoinbaseBtc = prices.filter(price => {
-              return(
-                price.exchange === 'coinbase' && price.currency_pair === 'btcusd'
-              )
-              }).map(price => {
-                return(
-                  parseFloat(price.last)
-                )
-            });
-            let chartDate = prices.filter(price => {
-              return(
-                price.exchange === 'bitstamp' && price.currency_pair === 'btcusd'
-              )
-            }).map(price => {
-              return(
-                ""
-              )
-            });
-            this.setState({
-              prices: prices,
-              chartBitstampBtc: chartBitstampBtc,
-              chartBitfinexBtc: chartBitfinexBtc,
-              chartCoinbaseBtc: chartCoinbaseBtc,
-              chartDate: chartDate
-            });
-          })
-          .catch(error => console.error(`Error in fetch: ${error.message}`));
+          this.priceChartUpdate();
+          this.priceStreamUpdate();
+          this.priceStreamRefresh = setInterval(this.priceStreamUpdate, 1000);
+          this.priceChartRefresh = setInterval(this.priceChartUpdate, 1000);
+
   }
 
   addNewNotification(formPayload) {
@@ -144,7 +177,7 @@ class NotificationsContainer extends React.Component {
 
   render() {
 
-    let prices = this.state.prices.map(price => {
+    let prices = this.state.priceStream.map(price => {
       return(
         <PriceTile
           key={price.id}
@@ -192,7 +225,10 @@ class NotificationsContainer extends React.Component {
       />
       <div className="row">
         <div className="col s12 l4">
-          {prices}
+          <ul className="collection with-header">
+            <li className="collection-header"><h4>Latest Prices</h4></li>
+            {prices.reverse()}
+          </ul>
         </div>
         <div className="col s12 l8">
           <table>
@@ -210,7 +246,6 @@ class NotificationsContainer extends React.Component {
               </tr>
             </thead>
             <tbody>
-
               {notifications}
             </tbody>
         </table>
