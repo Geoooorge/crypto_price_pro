@@ -26,13 +26,20 @@
       </div>
     </nav>
 
-    <div class="flash-notices">
-      <% flash.each do |type, message| %>
-        <div class="flash-<%= type %>">
-          <%= message %>
-        </div>
+    <% if flash[:notice] %>
+            <script type="text/javascript">
+              Materialize.toast('<%= notice %>', 6000)
+            </script>
+          <% elsif flash[:error] %>
+            <script type="text/javascript">
+              Materialize.toast('<%= flash[:error] %>', 6000)
+            </script>
+          <% elsif flash[:alert] %>
+            <script type="text/javascript">
+              Materialize.toast('<%= alert %>', 6000)
+            </script>
       <% end %>
-    </div>
+
     <div class="container">
       <%= yield %>
     </div>

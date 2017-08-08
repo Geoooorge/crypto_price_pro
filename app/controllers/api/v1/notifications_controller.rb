@@ -25,6 +25,12 @@ class Api::V1::NotificationsController < ApplicationController
     end
   end
 
+  def destroy
+    @notification = Notification.find(params[:id])
+    @notification.destroy
+    render json: Notification.where(user: current_user)
+  end
+
   private
 
   def authorize_user
