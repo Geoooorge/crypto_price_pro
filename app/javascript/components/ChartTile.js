@@ -16,13 +16,6 @@ class ChartTile extends React.Component {
           ]
         },
         {
-          label: 'Ethereum (Coinbase)',
-          data: this.props.chartCoinbaseEth,
-          backgroundColor:[
-            'rgba(12, 142, 37, 0.2)'
-          ]
-        },
-        {
           label: 'Bitcoin (Bitfinex)',
           data: this.props.chartBitfinexBtc,
           backgroundColor:[

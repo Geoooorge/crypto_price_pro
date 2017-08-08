@@ -1,5 +1,5 @@
 class Api::V1::PricesController < ApplicationController
   def index
-    render json: Price.last(200)
+    render json: Price.last(300)
   end
 end
