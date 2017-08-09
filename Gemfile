@@ -13,6 +13,9 @@ gem 'webpacker'
 gem "active_model_serializers"
 gem 'materialize-sass'
 gem 'material_icons'
+gem 'sidekiq'
+gem 'sinatra', github: 'sinatra/sinatra'
+gem 'sidekiq-scheduler'
 
 group :development do
   gem 'listen', '~> 3.0.5'

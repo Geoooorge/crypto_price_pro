@@ -4,7 +4,7 @@ class Api::V1::PricesController < ApplicationController
   end
 
   def chart_prices
-    render json: Price.where(exchange: 'bitfinex').where(currency_pair: 'btcusd').or(Price.where(exchange: 'coinbase').where(currency_pair: 'btcusd')).or(Price.where(exchange: 'bitstamp').where(currency_pair: 'btcusd')).last(300)
+    render json: Price.where(exchange: 'bitfinex').where(currency_pair: 'btcusd').or(Price.where(exchange: 'coinbase').where(currency_pair: 'btcusd')).or(Price.where(exchange: 'bitstamp').where(currency_pair: 'btcusd')).last(150)
   end
 
   def chart_stream
