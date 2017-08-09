@@ -1,0 +1,4 @@
+:schedule:
+  price:
+    every: '1m'
+    class: PriceWorker
