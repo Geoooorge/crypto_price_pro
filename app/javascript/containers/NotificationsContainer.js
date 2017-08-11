@@ -102,7 +102,6 @@ class NotificationsContainer extends React.Component {
           });
         })
         .catch(error => console.error(`Error in fetch: ${error.message}`));
-
   }
 
   componentDidMount() {
@@ -213,12 +212,14 @@ class NotificationsContainer extends React.Component {
 
     return(
     <div>
+      <div className="bitcoin-chart">
       <ChartTile
         chartBitstampBtc={this.state.chartBitstampBtc}
         chartBitfinexBtc={this.state.chartBitfinexBtc}
         chartCoinbaseBtc={this.state.chartCoinbaseBtc}
         chartDate={this.state.chartDate}
       />
+    </div>
       <NotificationsFormContainer
         addNewNotification={this.addNewNotification}
         options={options}
@@ -231,16 +232,16 @@ class NotificationsContainer extends React.Component {
           </ul>
         </div>
         <div className="col s12 l8">
-          <table>
+          <table className="responsive-table striped">
             <thead>
               <tr>
                   <th>Exchange</th>
-                  <th>Curency Pair</th>
-                  <th>Notification Type</th>
+                  <th>Curency</th>
+                  <th>Alert Type</th>
                   <th>Direction</th>
                   <th>Target Price</th>
-                  <th>Notifications Sent</th>
-                  <th>Max Notifications</th>
+                  <th>Alerts Sent</th>
+                  <th>Max Alerts</th>
                   <th>Status</th>
                   <th>Delete</th>
               </tr>

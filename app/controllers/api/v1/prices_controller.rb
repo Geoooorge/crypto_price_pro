@@ -8,6 +8,6 @@ class Api::V1::PricesController < ApplicationController
   end
 
   def chart_stream
-    render json: Price.last(30)
+    render json: Price.last(7)
   end
 end
