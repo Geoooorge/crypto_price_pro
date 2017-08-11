@@ -14,18 +14,54 @@
  *= require_tree .
  *= require_self
  */
-
+@import "materialize/components/color";
+$primary-color: color("blue-grey", "darken-4") !default;
+$secondary-color: color("blue-grey", "darken-1") !default;
 
 @import "materialize";
 
-.btn {
-  background-color: #1D313E;
+td {
+  text-align: center;
 }
 
-.nav-wrapper {
-  background-color: #061A40;
+th {
+  text-align: center;
+  vertical-align: top;
 }
 
-.homepage {
-  background-color: #061A40;
+h2 {
+  text-align: center;
+  text-shadow: 1px 1px 2px black;
+  color: #ef6c00;
+}
+
+.index-callout {
+  margin-top: 10rem;
+}
+
+.index-buttons {
+  margin-top: 6rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.brand-logo {
+  margin-left: 2rem;
+}
+
+.splash {
+    background-image: url("buildings.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: #37474f;
+}
+
+.bitcoin-chart {
+  margin-top: 3rem;
+}
+
+.form-bottom {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-end;
 }

@@ -87,7 +87,7 @@ class NotificationsFormContainer extends React.Component {
       <form className="new-notification-form col s12" onSubmit={this.handleFormSubmit}>
         <div className="row">
 
-          <div className="col s12 l2 m6">
+          <div className="col s12 l4 m6">
             <ExchangeSelect
               handlerFunction={this.handleFirstLevelChange}
               name='exchange'
@@ -97,7 +97,7 @@ class NotificationsFormContainer extends React.Component {
             />
           </div>
 
-          <div className="col s12 l2 m6">
+          <div className="col s12 l4 m6">
             <CurrencySelect
               handlerFunction={this.handleSecondLevelChange}
               name='currency-pair'
@@ -108,7 +108,7 @@ class NotificationsFormContainer extends React.Component {
           </div>
 
 
-          <div className="col s12 l2 m6">
+          <div className="col s12 l4 m6">
             <DirectionSelect
               handlerFunction={this.handleDirectionSelection}
               name='direction'
@@ -117,7 +117,9 @@ class NotificationsFormContainer extends React.Component {
               selectedOption={this.state.directionSelected}
             />
           </div>
-          <div className="col s12 l2 m6">
+        </div>
+      <div className="row form-bottom">
+          <div className="col s12 l3 m6">
             <PriceText
               content={this.state.price}
               name='price'
@@ -125,7 +127,7 @@ class NotificationsFormContainer extends React.Component {
               handlerFunction={this.handlePriceChange}
             />
           </div>
-          <div className="col s12 l2 m6">
+          <div className="col s12 l3 m6">
             <NotifyTypeSelect
               handlerFunction={this.handleNotifyTypeSelection}
               name='alert-type'
@@ -134,7 +136,7 @@ class NotificationsFormContainer extends React.Component {
               selectedOption={this.state.notifyTypeSelected}
             />
           </div>
-          <div className="col s12 l2 m6">
+          <div className="col s12 l3 m6">
             <NotifyMaxSelect
               handlerFunction={this.handleMaxChange}
               name='max-notifications'
@@ -144,7 +146,9 @@ class NotificationsFormContainer extends React.Component {
             />
           </div>
           <div className="button-group">
-            <input className="waves-effect waves-light btn" type="submit" value="Add Alert" />
+            <button className="btn waves-effect waves-light" type="submit" name="Add Alert">Add Alert
+              <i className="material-icons right">send</i>
+            </button>
           </div>
         </div>
       </form>
