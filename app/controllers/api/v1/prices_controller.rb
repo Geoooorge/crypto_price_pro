@@ -1,6 +1,6 @@
 class Api::V1::PricesController < ApplicationController
   def index
-    render json: Price.last(210)
+    render json: Price.last(360)
   end
 
   def chart_prices
