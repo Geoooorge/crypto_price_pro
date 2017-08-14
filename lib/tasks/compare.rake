@@ -24,6 +24,8 @@ namespace :notify do
               notification.save
               if notification.notification_type == 'text'
                 send_text(notification.user.phone, notification.user.first_name, @price.exchange, notification.currency_pair, notification.direction, notification.target_price, @price.last)
+              elsif notification.notification_type == 'email'
+                AlertMailer.new_alert(notification, @price).deliver_now
               end
             elsif notification.direction == 'above' && @price.last > notification.target_price
               notification.increment(:notifications_sent)
@@ -35,6 +37,8 @@ namespace :notify do
               notification.save
               if notification.notification_type == 'text'
                 send_text(notification.user.phone, notification.user.first_name, @price.exchange, notification.currency_pair, notification.direction, notification.target_price, @price.last)
+              elsif notification.notification_type == 'email'
+                AlertMailer.new_alert(notification, @price).deliver_now
               end
             end
           end
