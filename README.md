@@ -1,26 +1,51 @@
-![Build Status](https://codeship.com/projects/5f17c330-578d-0135-6f2c-3e9c72e1d412/status?branch=master)
-![Code Climate](https://codeclimate.com/github/Geoooorge/crypto_price_pro.png)
-![Coverage Status](https://coveralls.io/repos/Geoooorge/crypto_price_pro/badge.svg)
+
 
 # README
+![Build Status](https://codeship.com/projects/5f17c330-578d-0135-6f2c-3e9c72e1d412/status?branch=master)
+![Code Climate](https://codeclimate.com/github/Geoooorge/crypto_price_pro.png)
 
-This README would normally document whatever steps are necessary to get the application up and running.
+## Coin Gazer (Breakable Toy)
+### Launch Academy, August 2017
 
-Things you may want to cover:
+Coin Gazer provides up-to-the-minute trade and price data for cryptocurrencies such as Bitcoin, Ethereum, and Litecoin. Users create and receive custom alerts when individual currencies/exchanges reach a user's specified price threshold.
 
-* Ruby version
-* System dependencies
+### Technology
 
-* Configuration
+1. The user interface is built in React.js.
+2. API price updates are handled by Redis and Sidekiq. Alternatively, price updates can be run using a rake task:
+`rake trades:all_pricing`
+3. The user interface page incorporates the Chart.js library to display recent trade data.
+4. User price notifications are sent by text and email using Twilio and Sendgrid.
 
-* Database creation
 
-* Database initialization
+### Setup
+To set up this program on your system, first make sure the Redis is installed, then run:
 
-* How to run the test suite
+```
+bundle
+rake db:create
+rake db:migrate
+rails s
+```
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+In separate terminal tab, run the following:
 
-* ...
+```
+yarn
+yarn start
+```
+
+In a separate terminal tab start the Redis server by running the following:
+```
+redis-server
+```
+
+In another terminal window, run the following:
+```
+sidekiq ./app/workers/price_worker.rb
+```
+
+Navigate to `localhost:3000`. The site should show up after this.
+
+Please refer to the `.env.example` file to see what API keys/etc. you will need to set up for this app.
