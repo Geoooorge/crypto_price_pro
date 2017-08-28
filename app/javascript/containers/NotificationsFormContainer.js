@@ -19,7 +19,8 @@ class NotificationsFormContainer extends React.Component {
       notifyTypeSelected: 'text',
       price: '',
       notifyMaxOptions: [1, 2, 3, 4, 5],
-      notifyMaxSelected: 1
+      notifyMaxSelected: 1,
+      error: ''
     }
     this.handleExchangeSelection = this.handleExchangeSelection.bind(this);
     this.handleCurrencySelection = this.handleCurrencySelection.bind(this);
@@ -28,22 +29,42 @@ class NotificationsFormContainer extends React.Component {
     this.handleMaxChange = this.handleMaxChange.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleFirstLevelChange = this.handleFirstLevelChange.bind(this)
-    this.handleSecondLevelChange = this.handleSecondLevelChange.bind(this)
+    this.handleFirstLevelChange = this.handleFirstLevelChange.bind(this);
+    this.handleSecondLevelChange = this.handleSecondLevelChange.bind(this);
+    this.validateForm = this.validateForm.bind(this);
+    this.handleClear = this.handleClear.bind(this);
   }
 
   handleFormSubmit(event) {
     event.preventDefault();
-    let formPayload = {
-      exchange: this.state.firstLevel,
-      currency_pair: this.state.secondLevel,
-      direction: this.state.directionSelected,
-      notification_type: this.state.notifyTypeSelected,
-      target_price: this.state.price,
-      notifications_max: this.state.notifyMaxSelected
+    if (this.validateForm(this.state.secondLevel) && this.validateForm(this.state.price)) {
+      let formPayload = {
+        exchange: this.state.firstLevel,
+        currency_pair: this.state.secondLevel,
+        direction: this.state.directionSelected,
+        notification_type: this.state.notifyTypeSelected,
+        target_price: this.state.price,
+        notifications_max: this.state.notifyMaxSelected
+      }
+      this.props.addNewNotification(formPayload);
+      this.handleClear(event);
+    }else if (this.state.secondLevel === '') {
+      this.setState({error: 'Please select a currency pair'});
+    }else {
+      this.setState({error: 'Please enter a valid price target'})
     }
-    this.props.addNewNotification(formPayload);
   }
+
+  validateForm(text) {
+    return (text != '')
+  };
+
+  handleClear(event) {
+    event.preventDefault();
+    this.setState({
+      error: ''
+    })
+  };
 
   handleFirstLevelChange(event) {
    this.setState({firstLevel: event.target.value});
@@ -81,10 +102,15 @@ class NotificationsFormContainer extends React.Component {
 
     let firstLevelOptions = Object.keys(this.props.options)
     let secondLevelOptions = this.props.options[this.state.firstLevel]
+    let errorMessage;
+    if (this.state.error != '') {
+      errorMessage = this.state.error
+    }
 
     return(
     <div className="row">
       <form className="new-notification-form col s12" onSubmit={this.handleFormSubmit}>
+        {errorMessage}
         <div className="row">
 
           <div className="col s12 l4 m6">
