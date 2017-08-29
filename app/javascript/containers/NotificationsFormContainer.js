@@ -112,7 +112,6 @@ class NotificationsFormContainer extends React.Component {
       <form className="new-notification-form col s12" onSubmit={this.handleFormSubmit}>
         {errorMessage}
         <div className="row">
-
           <div className="col s12 l4 m6">
             <ExchangeSelect
               handlerFunction={this.handleFirstLevelChange}
@@ -122,7 +121,6 @@ class NotificationsFormContainer extends React.Component {
               selectedOption={this.state.firstLevel}
             />
           </div>
-
           <div className="col s12 l4 m6">
             <CurrencySelect
               handlerFunction={this.handleSecondLevelChange}
@@ -132,8 +130,6 @@ class NotificationsFormContainer extends React.Component {
               selectedOption={this.state.secondLevel}
             />
           </div>
-
-
           <div className="col s12 l4 m6">
             <DirectionSelect
               handlerFunction={this.handleDirectionSelection}
@@ -144,7 +140,7 @@ class NotificationsFormContainer extends React.Component {
             />
           </div>
         </div>
-      <div className="row form-bottom">
+        <div className="row form-bottom">
           <div className="col s12 l3 m6">
             <PriceText
               content={this.state.price}
