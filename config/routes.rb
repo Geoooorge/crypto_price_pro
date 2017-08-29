@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
   devise_for :users
 
-  resources :notifications
+  resources :notifications, only: [:index]
   root "prices#index"
 
   namespace :api do
