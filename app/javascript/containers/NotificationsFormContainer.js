@@ -99,7 +99,6 @@ class NotificationsFormContainer extends React.Component {
   }
 
   render() {
-
     let firstLevelOptions = Object.keys(this.props.options)
     let secondLevelOptions = this.props.options[this.state.firstLevel]
     let errorMessage;
