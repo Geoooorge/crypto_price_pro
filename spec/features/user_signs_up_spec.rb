@@ -58,6 +58,4 @@ feature "User Signs Ups" do
     expect(page).to have_content("Password confirmation doesn't match Password")
     expect(page).to_not have_content("Welcome back James!")
   end
-
-
 end
