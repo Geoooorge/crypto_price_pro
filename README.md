@@ -1,13 +1,13 @@
 
 
 # README
-![Build Status](https://codeship.com/projects/5f17c330-578d-0135-6f2c-3e9c72e1d412/status?branch=master)
-![Code Climate](https://codeclimate.com/github/Geoooorge/crypto_price_pro.png)
 
 ## Coin Gazer (Breakable Toy)
 ### Launch Academy, August 2017
 
 Coin Gazer provides up-to-the-minute trade and price data for cryptocurrencies such as Bitcoin, Ethereum, and Litecoin. Users create and receive custom alerts when individual currencies/exchanges reach a user's specified price threshold.
+
+![Coin Gazer Screenshot](./coingazer-vid.gif)
 
 ### Technology
 
