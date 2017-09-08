@@ -20,6 +20,7 @@ class NotificationsContainer extends React.Component {
     this.deleteNotification = this.deleteNotification.bind(this);
     this.priceStreamUpdate = this.priceStreamUpdate.bind(this);
     this.priceChartUpdate = this.priceChartUpdate.bind(this);
+    this.updateNotification = this.updateNotification.bind(this);
   }
 
   priceStreamUpdate() {
@@ -173,6 +174,36 @@ class NotificationsContainer extends React.Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  updateNotification(formPayload) {
+    let update_id = formPayload.id
+    fetch(`/api/v1/notifications/${update_id}`, {
+      method: 'PATCH',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formPayload)
+    })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+              error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        let message = body;
+        this.setState({
+          notifications: notifications
+        });
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+
+  }
+
 
   render() {
 
@@ -206,6 +237,7 @@ class NotificationsContainer extends React.Component {
           userId={notification.user_id}
           status={notification.status}
           deleteNotification={this.deleteNotification}
+          updateNotification={this.updateNotification}
         />
       )
     })
