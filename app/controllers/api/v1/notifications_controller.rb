@@ -25,6 +25,19 @@ class Api::V1::NotificationsController < ApplicationController
     end
   end
 
+  def show
+    @notification = Notification.find(params[:id])
+    render json: Notification.where(params[:id], user: current_user)
+
+  end
+
+  def update
+    data = JSON.parse(request.body.read)
+    # @notification = Notification.find(params[:id])
+    Notification.update(params[:id], status: data["status"])
+    render json: Notification.where(params[:id], user: current_user)
+  end
+
   def destroy
     @notification = Notification.find(params[:id])
     @notification.destroy
