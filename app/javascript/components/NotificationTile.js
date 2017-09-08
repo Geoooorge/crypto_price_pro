@@ -24,9 +24,11 @@ class NotificationTile extends React.Component {
     let status;
     if (this.state.status === 'active') {
       status = 'inactive';
+      this.setState({status: 'inactive'})
     }
     else {
       status = 'active';
+      this.setState({status: 'active'})
     }
 
     let formPayload = {

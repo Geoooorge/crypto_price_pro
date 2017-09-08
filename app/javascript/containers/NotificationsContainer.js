@@ -193,13 +193,6 @@ class NotificationsContainer extends React.Component {
           throw(error);
         }
       })
-      .then(response => response.json())
-      .then(body => {
-        let message = body;
-        this.setState({
-          notifications: notifications
-        });
-      })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
 
   }
