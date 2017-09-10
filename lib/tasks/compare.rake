@@ -23,7 +23,7 @@ namespace :notify do
               notification.increment(:notifications_sent)
               notification.save
               if notification.notification_type == 'text'
-                send_text(notification.user.phone, notification.user.first_name, @price.exchange, notification.currency_pair, notification.direction, notification.target_price, @price.last)
+                Text.send_text(notification.user.phone, notification.user.first_name, @price.exchange, notification.currency_pair, notification.direction, notification.target_price, @price.last)
               elsif notification.notification_type == 'email'
                 AlertMailer.new_alert(notification, @price).deliver_now
               end
@@ -31,7 +31,7 @@ namespace :notify do
               notification.increment(:notifications_sent)
               notification.save
               if notification.notification_type == 'text'
-                send_text(notification.user.phone, notification.user.first_name, @price.exchange, notification.currency_pair, notification.direction, notification.target_price, @price.last)
+                Text.send_text(notification.user.phone, notification.user.first_name, @price.exchange, notification.currency_pair, notification.direction, notification.target_price, @price.last)
               elsif notification.notification_type == 'email'
                 AlertMailer.new_alert(notification, @price).deliver_now
               end
@@ -47,15 +47,4 @@ namespace :notify do
       end
     end
   end
-end
-
-def send_text(phone, first_name, exchange, currency_pair, direction, target_price, last_price)
-  name = first_name
-  @client = Twilio::REST::Client.new(ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"])
-
-  @client.messages.create({
-    :from => "+1#{ENV["TWILIO_FROM_NUMBER"]}",
-    :to => "+1#{phone}",
-    body: "Hi #{name}! The price of #{currency_pair.upcase} (#{exchange.capitalize}) is now #{direction} #{target_price} at #{last_price}! - G"
-    })
 end
