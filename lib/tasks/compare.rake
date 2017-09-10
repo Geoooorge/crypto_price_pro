@@ -30,16 +30,16 @@ namespace :notify do
             elsif notification.direction == 'above' && @price.last > notification.target_price
               notification.increment(:notifications_sent)
               notification.save
-            else
-            end
-            if notification.notifications_sent >= notification.notifications_max
-              notification.status = 'inactive'
-              notification.save
               if notification.notification_type == 'text'
                 send_text(notification.user.phone, notification.user.first_name, @price.exchange, notification.currency_pair, notification.direction, notification.target_price, @price.last)
               elsif notification.notification_type == 'email'
                 AlertMailer.new_alert(notification, @price).deliver_now
               end
+            else
+            end
+            if notification.notifications_sent >= notification.notifications_max
+              notification.status = 'inactive'
+              notification.save
             end
           end
         end
